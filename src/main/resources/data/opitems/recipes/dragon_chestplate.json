@@ -1,0 +1,13 @@
+{
+"type": "minecraft:crafting_shaped",
+"group": "opitems",
+"pattern": ["a a","aaa","aaa"],
+"key": {
+"a":{
+"item": "opitems:dragon_material"
+}
+},
+"result":{
+"item": "opitems:dragon_chestplate"
+}
+}

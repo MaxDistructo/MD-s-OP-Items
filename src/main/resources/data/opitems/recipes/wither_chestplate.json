@@ -1,0 +1,13 @@
+{
+"type": "minecraft:crafting_shaped",
+"group": "opitems",
+"pattern": ["a a","aaa","aaa"],
+"key": {
+"a":{
+"item": "opitems:wither_material"
+}
+},
+"result":{
+"item": "opitems:wither_chestplate"
+}
+}

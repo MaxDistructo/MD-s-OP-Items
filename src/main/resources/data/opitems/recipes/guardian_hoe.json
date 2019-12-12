@@ -1,0 +1,16 @@
+{
+"type": "minecraft:crafting_shaped",
+"group": "opitems",
+"pattern": ["aa "," b "," b "],
+"key": {
+"a":{
+"item": "opitems:guardian_material"
+},
+"b":{
+"item": "opitems:obsidian_stick"
+}
+},
+"result":{
+"item": "opitems:guardian_hoe"
+}
+}

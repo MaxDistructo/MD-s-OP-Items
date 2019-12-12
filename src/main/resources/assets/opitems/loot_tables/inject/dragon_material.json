@@ -1,0 +1,16 @@
+{
+  "pools": [
+    {
+      "name": "dragon_material",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "opitems:dragon_material",
+          "weight": 100,
+          "count": 8
+        }
+      ]
+    }
+  ]
+}

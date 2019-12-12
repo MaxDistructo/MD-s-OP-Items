@@ -1,0 +1,16 @@
+{
+"type": "minecraft:crafting_shaped",
+"group": "opitems",
+"pattern": ["aa ","ab "," b "],
+"key": {
+"a":{
+"item": "opitems:guardian_material"
+},
+"b":{
+"item": "opitems:obsidian_stick"
+}
+},
+"result":{
+"item": "opitems:guardian_axe"
+}
+}

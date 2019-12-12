@@ -1,0 +1,13 @@
+{
+"type": "minecraft:crafting_shaped",
+"group": "opitems",
+"pattern": ["a a","aaa","aaa"],
+"key": {
+"a":{
+"item": "opitems:guardian_material"
+}
+},
+"result":{
+"item": "opitems:guardian_chestplate"
+}
+}
