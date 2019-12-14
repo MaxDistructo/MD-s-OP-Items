@@ -30,5 +30,6 @@
   "item.opitems.guardian_shovel": "Guardian Shovel",
   "item.opitems.guardian_sword": "Guardian Sword",
   "item.opitems.guardian_material": "Guardian Material",
+  "attribute.name.generic.flyingSpeed": "Fly Speed",
   "itemGroup.opitems": "MaxDistructo's OP Items"
 }

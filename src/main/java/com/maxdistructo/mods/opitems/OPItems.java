@@ -13,6 +13,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
@@ -40,7 +41,7 @@ public class OPItems {
         @Override
         @OnlyIn(Dist.CLIENT)
         public ItemStack createIcon() {
-            return new ItemStack(Blocks.DIRT);
+            return new ItemStack(OPItems.registry.getValue(new ResourceLocation(OPItems.MOD_ID,  "dragon_sword")));
         }
     };
     public static final Item.Properties defaultProperties = new Item.Properties() {
