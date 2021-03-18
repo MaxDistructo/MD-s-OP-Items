@@ -99,11 +99,11 @@ public class OPGuardianToolDef{
         }
     }
     public static class hoe extends HoeItem {
-        public hoe(IItemTier tier, float attackSpeedIn, Properties builder) {
-            super(tier, attackSpeedIn, builder);
+        public hoe(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builder) {
+            super(tier, attackDamageIn, attackSpeedIn, builder);
         }
         public hoe(IOPItemTool material){
-            super(material.getMcTier(),  material.getSpeed(), material.getProperties());
+            super(material.getMcTier(), material.getDamage(), material.getSpeed(), material.getProperties());
             this.setRegistryName(OPItems.MOD_ID, material.getName() + "hoe");
         }
 

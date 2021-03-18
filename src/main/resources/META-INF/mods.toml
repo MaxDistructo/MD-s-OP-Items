@@ -1,7 +1,8 @@
 modLoader="javafml" #mandatory
-loaderVersion="[31,)" #mandatory (25 is current forge version)
+loaderVersion="[36,)" #mandatory (25 is current forge version)
 issueTrackerURL="http://github.com/McJtyMods/TheOneProbe/issues"
 displayURL="http://github.com/McJtyMods/TheOneProbe/"
+license="Don't Be a Jerk License https://localhost/license"
 # A file name (in the root of the mod JAR) containing a logo for display
 #logoFile="examplemod.png" #optional
 # A text field displayed in the mod UI
@@ -27,7 +28,7 @@ probe required if you so desire.
 [[dependencies.opitems]] #optional
     modId="forge" #mandatory
     mandatory=true #mandatory
-    versionRange="[31,)" #mandatory
+    versionRange="[36,)" #mandatory
     # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
     ordering="NONE"
     # Side this dependency is applied on - BOTH, CLIENT or SERVER
@@ -36,6 +37,6 @@ probe required if you so desire.
 [[dependencies.opitems]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.15,1.16)"
+    versionRange="[1.16,1.17)"
     ordering="NONE"
     side="BOTH"

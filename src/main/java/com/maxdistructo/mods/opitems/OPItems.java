@@ -154,7 +154,7 @@ public class OPItems {
                                 this.setRegistryName(OPItems.MOD_ID, tier.getName() + "shovel");
                             }
                         },
-                        new HoeItem(tier.getMcTier(), tier.getSpeed(), tier.getProperties()) {
+                        new HoeItem(tier.getMcTier(), tier.getDamage(), tier.getSpeed(), tier.getProperties()) {
                             {
                                 this.setRegistryName(OPItems.MOD_ID, tier.getName() + "hoe");
                             }

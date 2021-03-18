@@ -14,7 +14,6 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class MobLoot {
 
-    @SubscribeEvent
     public static void onEntityDeath(LivingDropsEvent event) { //Wither does not have loot table so have to dirty add the drop.
         if (event.getEntity() instanceof WitherEntity) {
             event.getEntity().entityDropItem(new ItemStack(OPItems.registry.getValue(new ResourceLocation(OPItems.MOD_ID, "wither_material")), 6));

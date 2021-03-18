@@ -4,10 +4,9 @@ import com.google.common.collect.Multimap;
 import com.maxdistructo.mods.opitems.OPItems;
 import com.maxdistructo.mods.opitems.defined.OPArmorDefs;
 import com.maxdistructo.mods.opitems.interfaces.IArmorItemExtension;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
@@ -27,7 +26,7 @@ public class OPArmor {
         public static OPArmorDefs getDef(){
             return def;
         }
-        Map<IAttribute, AttributeModifier> modifiers = new HashMap<>();
+        Map<Attribute, AttributeModifier> modifiers = new HashMap<>();
         List<UUID> health_uuids = new ArrayList<>();
         List<UUID> speed_uuids = new ArrayList<>();
         List<UUID> fly_uuids = new ArrayList<>();
@@ -77,28 +76,29 @@ public class OPArmor {
                 if (!player.isCreative() && !player.isSpectator()){
                     player.abilities.allowFlying = false;
                 }
-                player.getAttribute(SharedMonsterAttributes.MAX_HEALTH).removeModifier(health_boost);
+                player.getAttribute(Attributes.MAX_HEALTH).removeModifier(health_boost);
 
             }
         }
 
+        /*
         @Override
-        public Multimap<String, AttributeModifier> getAttributeModifiers(EquipmentSlotType slot) {
-            Multimap<String, AttributeModifier> map = super.getAttributeModifiers(slot);
+        public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType slot) {
+            Multimap<Attribute, AttributeModifier> map = super.getAttributeModifiers(slot);
             if (this.slot == slot) {
-                map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), getOrCreateModifier(SharedMonsterAttributes.ATTACK_DAMAGE, () -> new AttributeModifier(damage_uuids.get(slot.getIndex()), "opitems:" + slot.getName() + "_attackdamage", 1.25f, AttributeModifier.Operation.ADDITION)));
-                map.put(SharedMonsterAttributes.MAX_HEALTH.getName(), getOrCreateModifier(SharedMonsterAttributes.MAX_HEALTH, () -> new AttributeModifier(health_uuids.get(slot.getIndex()), "opitems:" + slot.getName() + "_hp", 2.5f, AttributeModifier.Operation.ADDITION)));
+                map.put(Attributes.ATTACK_DAMAGE, getOrCreateModifier(Attributes.ATTACK_DAMAGE, () -> new AttributeModifier(damage_uuids.get(slot.getIndex()), "opitems:" + slot.getName() + "_attackdamage", 1.25f, AttributeModifier.Operation.ADDITION)));
+                map.put(Attributes.MAX_HEALTH, getOrCreateModifier(Attributes.MAX_HEALTH, () -> new AttributeModifier(health_uuids.get(slot.getIndex()), "opitems:" + slot.getName() + "_hp", 2.5f, AttributeModifier.Operation.ADDITION)));
             }
             return map;
         }
-
+        */
         @Override
         public String getRegName() {
             return "wither_";
         }
 
         @Override
-        public Map<IAttribute, AttributeModifier> getModifiers() {
+        public Map<Attribute, AttributeModifier> getModifiers() {
             return modifiers;
         }
     }
@@ -107,7 +107,7 @@ public class OPArmor {
         public static OPArmorDefs getDef(){
             return def;
         }
-        Map<IAttribute, AttributeModifier> modifiers = new HashMap<>();
+        Map<Attribute, AttributeModifier> modifiers = new HashMap<>();
         List<UUID> health_uuids = new ArrayList<>();
         List<UUID> speed_uuids = new ArrayList<>();
         List<UUID> fly_uuids = new ArrayList<>();
@@ -158,22 +158,23 @@ public class OPArmor {
         }
 
         @Override
-        public Map<IAttribute, AttributeModifier> getModifiers() {
+        public Map<Attribute, AttributeModifier> getModifiers() {
             return modifiers;
         }
 
+        /*
         @Override
-        public Multimap<String, AttributeModifier> getAttributeModifiers(EquipmentSlotType slot) {
-            Multimap<String, AttributeModifier> map = super.getAttributeModifiers(slot);
+        public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType slot) {
+            Multimap<Attribute, AttributeModifier> map = super.getAttributeModifiers(slot);
             if (this.slot == slot) {
-                map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), getOrCreateModifier(SharedMonsterAttributes.ATTACK_DAMAGE, () -> new AttributeModifier(damage_uuids.get(slot.getIndex()), "opitems:" + slot.getName() + "_attackdamage", 2.5f, AttributeModifier.Operation.ADDITION)));
-                map.put(SharedMonsterAttributes.MOVEMENT_SPEED.getName(), getOrCreateModifier(SharedMonsterAttributes.MOVEMENT_SPEED, () -> new AttributeModifier(speed_uuids.get(slot.getIndex()), "opitems:" + slot.getName() + "_movementspeed", 0.175f, AttributeModifier.Operation.ADDITION)));
-                map.put(SharedMonsterAttributes.FLYING_SPEED.getName(), getOrCreateModifier(SharedMonsterAttributes.FLYING_SPEED, () -> new AttributeModifier(fly_uuids.get(slot.getIndex()), "opitems:" + slot.getName() + "_flyspeed", 0.175f, AttributeModifier.Operation.ADDITION)));
-                map.put(SharedMonsterAttributes.MAX_HEALTH.getName(), getOrCreateModifier(SharedMonsterAttributes.MAX_HEALTH, () -> new AttributeModifier(health_uuids.get(slot.getIndex()), "opitems:" + slot.getName() + "_hp", 5f, AttributeModifier.Operation.ADDITION)));
+                map.put(Attributes.ATTACK_DAMAGE, getOrCreateModifier(Attributes.ATTACK_DAMAGE, () -> new AttributeModifier(damage_uuids.get(slot.getIndex()), "opitems:" + slot.getName() + "_attackdamage", 2.5f, AttributeModifier.Operation.ADDITION)));
+                map.put(Attributes.MOVEMENT_SPEED, getOrCreateModifier(Attributes.MOVEMENT_SPEED, () -> new AttributeModifier(speed_uuids.get(slot.getIndex()), "opitems:" + slot.getName() + "_movementspeed", 0.175f, AttributeModifier.Operation.ADDITION)));
+                map.put(Attributes.FLYING_SPEED, getOrCreateModifier(Attributes.FLYING_SPEED, () -> new AttributeModifier(fly_uuids.get(slot.getIndex()), "opitems:" + slot.getName() + "_flyspeed", 0.175f, AttributeModifier.Operation.ADDITION)));
+                map.put(Attributes.MAX_HEALTH, getOrCreateModifier(Attributes.MAX_HEALTH, () -> new AttributeModifier(health_uuids.get(slot.getIndex()), "opitems:" + slot.getName() + "_hp", 5f, AttributeModifier.Operation.ADDITION)));
             }
             return map;
         }
-
+        */
         @Override
         public String getRegName() {
             return "dragon_";
@@ -182,7 +183,7 @@ public class OPArmor {
     public static class OPGuardianArmor extends ArmorItem implements IArmorItemExtension {
         final static OPArmorDefs def = OPArmorDefs.GUARDIAN;
         public static OPArmorDefs getDef() {return def;}
-        Map<IAttribute, AttributeModifier> modifiers = new HashMap<>();
+        Map<Attribute, AttributeModifier> modifiers = new HashMap<>();
         public OPGuardianArmor (EquipmentSlotType type){
             super(def.getMaterial(), type, def.getProperties());
             setRegistryName(OPItems.MOD_ID, def.getName() + armorName[type.getIndex()]);
@@ -196,13 +197,13 @@ public class OPArmor {
         }
 
         @Override
-        public Map<IAttribute, AttributeModifier> getModifiers() {
+        public Map<Attribute, AttributeModifier> getModifiers() {
             return modifiers;
         }
 
         @Override
-        public Multimap<String, AttributeModifier> getAttributeModifiers(EquipmentSlotType slot) {
-            Multimap<String, AttributeModifier> map = super.getAttributeModifiers(slot);
+        public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType slot) {
+            Multimap<Attribute, AttributeModifier> map = super.getAttributeModifiers(slot);
             return map;
         }
 

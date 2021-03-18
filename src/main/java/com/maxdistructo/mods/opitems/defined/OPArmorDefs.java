@@ -68,6 +68,11 @@ public enum OPArmorDefs implements IOPArmor {
                 public float getToughness() {
                     return 3f;
                 }
+
+                @Override
+                public float getKnockbackResistance() {
+                    return 0;
+                }
             };
         }
 
@@ -140,6 +145,11 @@ public enum OPArmorDefs implements IOPArmor {
                 public float getToughness() {
                     return 5f;
                 }
+
+                @Override
+                public float getKnockbackResistance() {
+                    return 0;
+                }
             };
         }
 
@@ -211,6 +221,11 @@ public enum OPArmorDefs implements IOPArmor {
                 @Override
                 public float getToughness() {
                     return 2f;
+                }
+
+                @Override
+                public float getKnockbackResistance() {
+                    return 0;
                 }
             };
         }
