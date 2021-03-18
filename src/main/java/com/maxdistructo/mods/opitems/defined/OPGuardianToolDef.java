@@ -13,6 +13,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 
+import net.minecraft.item.Item.Properties;
+
 public class OPGuardianToolDef{
     public static class sword extends SwordItem {
         public sword(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builder) {
@@ -26,18 +28,18 @@ public class OPGuardianToolDef{
         @Override
         public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
             if(stack.getEquipmentSlot() == EquipmentSlotType.MAINHAND || stack.getEquipmentSlot() == EquipmentSlotType.OFFHAND){
-                player.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING, 5,1,false,false));
+                player.addEffect(new EffectInstance(Effects.WATER_BREATHING, 5,1,false,false));
             }
         }
 
         @Override
-        public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
             if(target.getType() == EntityType.GUARDIAN || target.getType() == EntityType.ELDER_GUARDIAN){
                 if(attacker.getType() == EntityType.PLAYER) {
-                    target.attackEntityFrom(DamageSource.causePlayerDamage((PlayerEntity) attacker), 3);
+                    target.hurt(DamageSource.playerAttack((PlayerEntity) attacker), 3);
                 }
             }
-            return super.hitEntity(stack, target, attacker);
+            return super.hurtEnemy(stack, target, attacker);
         }
     }
     public static class pick extends PickaxeItem {
@@ -52,7 +54,7 @@ public class OPGuardianToolDef{
         @Override
         public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
             if(stack.getEquipmentSlot() == EquipmentSlotType.MAINHAND || stack.getEquipmentSlot() == EquipmentSlotType.OFFHAND){
-                player.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING, 5,1,false,false));
+                player.addEffect(new EffectInstance(Effects.WATER_BREATHING, 5,1,false,false));
             }
         }
     }
@@ -68,7 +70,7 @@ public class OPGuardianToolDef{
         @Override
         public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
             if(stack.getEquipmentSlot() == EquipmentSlotType.MAINHAND || stack.getEquipmentSlot() == EquipmentSlotType.OFFHAND){
-                player.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING, 5,1,false,false));
+                player.addEffect(new EffectInstance(Effects.WATER_BREATHING, 5,1,false,false));
             }
         }
     }
@@ -84,18 +86,18 @@ public class OPGuardianToolDef{
         @Override
         public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
             if(stack.getEquipmentSlot() == EquipmentSlotType.MAINHAND || stack.getEquipmentSlot() == EquipmentSlotType.OFFHAND){
-                player.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING, 5,1,false,false));
+                player.addEffect(new EffectInstance(Effects.WATER_BREATHING, 5,1,false,false));
             }
         }
 
         @Override
-        public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
             if(target.getType() == EntityType.GUARDIAN || target.getType() == EntityType.ELDER_GUARDIAN){
                 if(attacker.getType() == EntityType.PLAYER) {
-                    target.attackEntityFrom(DamageSource.causePlayerDamage((PlayerEntity) attacker), 3);
+                    target.hurt(DamageSource.playerAttack((PlayerEntity) attacker), 3);
                 }
             }
-            return super.hitEntity(stack, target, attacker);
+            return super.hurtEnemy(stack, target, attacker);
         }
     }
     public static class hoe extends HoeItem {
@@ -103,14 +105,14 @@ public class OPGuardianToolDef{
             super(tier, attackDamageIn, attackSpeedIn, builder);
         }
         public hoe(IOPItemTool material){
-            super(material.getMcTier(), material.getDamage(), material.getSpeed(), material.getProperties());
+            super(material.getMcTier(), material.getDamage() - 9, material.getSpeed(), material.getProperties());
             this.setRegistryName(OPItems.MOD_ID, material.getName() + "hoe");
         }
 
         @Override
         public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
             if(stack.getEquipmentSlot() == EquipmentSlotType.MAINHAND || stack.getEquipmentSlot() == EquipmentSlotType.OFFHAND){
-                player.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING, 5,1,false,false));
+                player.addEffect(new EffectInstance(Effects.WATER_BREATHING, 5,1,false,false));
             }
         }
     }

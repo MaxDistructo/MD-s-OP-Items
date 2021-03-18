@@ -15,8 +15,8 @@ public enum OPItemDefs implements IOPItem {
         public Item.Properties getProperties() {
             return new Item.Properties(){
                 {
-                    this.maxStackSize(16);
-                    this.group(OPItems.itemGroup);
+                    this.stacksTo(16);
+                    this.tab(OPItems.itemGroup);
                 }
             };
         }

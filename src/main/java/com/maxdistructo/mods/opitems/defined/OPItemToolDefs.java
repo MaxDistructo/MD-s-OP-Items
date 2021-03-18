@@ -18,33 +18,33 @@ public class OPItemToolDefs {
         public IItemTier getMcTier() {
             return new IItemTier(){
                 @Override
-                public int getMaxUses() {
+                public int getUses() {
                     return 5000;
                 }
 
                 @Override
-                public float getEfficiency() {
+                public float getSpeed() {
                     return 5;
                 }
 
                 @Override
-                public float getAttackDamage() {
+                public float getAttackDamageBonus() {
                     return 5f;
                 }
 
                 @Override
-                public int getHarvestLevel() {
+                public int getLevel() {
                     return 10;
                 }
 
                 @Override
-                public int getEnchantability() {
+                public int getEnchantmentValue() {
                     return 10;
                 }
 
                 @Override
-                public Ingredient getRepairMaterial() {
-                    return Ingredient.fromTag(Objects.requireNonNull(ItemTags.getCollection().get(new ResourceLocation("assets/opitems", "material/wither"))));
+                public Ingredient getRepairIngredient() {
+                    return Ingredient.of(Objects.requireNonNull(ItemTags.getAllTags().getTag(new ResourceLocation("assets/opitems", "material/wither"))));
                 }
             };
         }
@@ -68,8 +68,8 @@ public class OPItemToolDefs {
         public Item.Properties getProperties() {
             return new Item.Properties(){
                 {
-                    this.maxDamage(5000);
-                    this.group(OPItems.itemGroup);
+                    this.durability(5000);
+                    this.tab(OPItems.itemGroup);
                     this.rarity(Rarity.RARE);
                 }
             };
@@ -81,33 +81,33 @@ public class OPItemToolDefs {
         public IItemTier getMcTier() {
             return new IItemTier(){
                 @Override
-                public int getMaxUses() {
+                public int getUses() {
                     return 10000;
                 }
 
                 @Override
-                public float getEfficiency() {
+                public float getSpeed() {
                     return 8;
                 }
 
                 @Override
-                public float getAttackDamage() {
+                public float getAttackDamageBonus() {
                     return 8f;
                 }
 
                 @Override
-                public int getHarvestLevel() {
+                public int getLevel() {
                     return 10;
                 }
 
                 @Override
-                public int getEnchantability() {
+                public int getEnchantmentValue() {
                     return 20;
                 }
 
                 @Override
-                public Ingredient getRepairMaterial() {
-                    return Ingredient.fromTag(Objects.requireNonNull(ItemTags.getCollection().get(new ResourceLocation("assets/opitems", "material/dragon"))));
+                public Ingredient getRepairIngredient() {
+                    return Ingredient.of(Objects.requireNonNull(ItemTags.getAllTags().getTag(new ResourceLocation("assets/opitems", "material/dragon"))));
                 }
             };
         }
@@ -131,8 +131,8 @@ public class OPItemToolDefs {
         public Item.Properties getProperties() {
             return new Item.Properties(){
                 {
-                    this.maxDamage(10000);
-                    this.group(OPItems.itemGroup);
+                    this.durability(10000);
+                    this.tab(OPItems.itemGroup);
                     this.rarity(Rarity.EPIC);
                 }
             };
@@ -145,33 +145,33 @@ public class OPItemToolDefs {
         public IItemTier getMcTier() {
             return new IItemTier(){
                 @Override
-                public int getMaxUses() {
+                public int getUses() {
                     return 3000;
                 }
 
                 @Override
-                public float getEfficiency() {
+                public float getSpeed() {
                     return 3.5f;
                 }
 
                 @Override
-                public float getAttackDamage() {
+                public float getAttackDamageBonus() {
                     return 3.5f;
                 }
 
                 @Override
-                public int getHarvestLevel() {
+                public int getLevel() {
                     return 8;
                 }
 
                 @Override
-                public int getEnchantability() {
+                public int getEnchantmentValue() {
                     return 10;
                 }
 
                 @Override
-                public Ingredient getRepairMaterial() {
-                    return Ingredient.fromTag(Objects.requireNonNull(ItemTags.getCollection().get(new ResourceLocation("assets/opitems", "material/guardian"))));
+                public Ingredient getRepairIngredient() {
+                    return Ingredient.of(Objects.requireNonNull(ItemTags.getAllTags().getTag(new ResourceLocation("assets/opitems", "material/guardian"))));
                 }
             };
         }
@@ -195,8 +195,8 @@ public class OPItemToolDefs {
         public Item.Properties getProperties() {
             return new Item.Properties(){
                 {
-                    this.maxDamage(3000);
-                    this.group(OPItems.itemGroup);
+                    this.durability(3000);
+                    this.tab(OPItems.itemGroup);
                     this.rarity(Rarity.RARE);
                 }
             };

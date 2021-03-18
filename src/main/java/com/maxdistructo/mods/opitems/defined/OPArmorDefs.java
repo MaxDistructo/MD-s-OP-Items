@@ -25,7 +25,7 @@ public enum OPArmorDefs implements IOPArmor {
         public Item.Properties getProperties() {
             return new Item.Properties(){
                 {
-                    this.group(OPItems.itemGroup);
+                    this.tab(OPItems.itemGroup);
                     this.rarity(Rarity.RARE);
                 }
             };
@@ -35,28 +35,28 @@ public enum OPArmorDefs implements IOPArmor {
         public IArmorMaterial getMaterial() {
             return new IArmorMaterial() {
                 @Override
-                public int getDurability(EquipmentSlotType slotIn) {
+                public int getDurabilityForSlot(EquipmentSlotType slotIn) {
                     return (int)(OPArmorDefs.WITHER.getMaxDurability() * OPArmorDefs.WITHER.getPercentOfMax()[slotIn.getIndex()]);
                 }
 
                 @Override
-                public int getDamageReductionAmount(EquipmentSlotType slotIn) {
+                public int getDefenseForSlot(EquipmentSlotType slotIn) {
                     return OPArmorDefs.WITHER.getReductionAmounts()[slotIn.getIndex()];
                 }
 
                 @Override
-                public int getEnchantability() {
+                public int getEnchantmentValue() {
                     return 10;
                 }
 
                 @Override
-                public SoundEvent getSoundEvent() {
-                    return SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND;
+                public SoundEvent getEquipSound() {
+                    return SoundEvents.ARMOR_EQUIP_DIAMOND;
                 }
 
                 @Override
-                public Ingredient getRepairMaterial() {
-                    return Ingredient.fromTag(Objects.requireNonNull(ItemTags.getCollection().get(new ResourceLocation("assets/opitems", "material/wither"))));
+                public Ingredient getRepairIngredient() {
+                    return Ingredient.of(Objects.requireNonNull(ItemTags.getAllTags().getTag(new ResourceLocation("assets/opitems", "material/wither"))));
                 }
 
                 @Override
@@ -102,7 +102,7 @@ public enum OPArmorDefs implements IOPArmor {
         public Item.Properties getProperties() {
             return new Item.Properties(){
                 {
-                    this.group(OPItems.itemGroup);
+                    this.tab(OPItems.itemGroup);
                     this.rarity(Rarity.EPIC);
                 }
             };
@@ -112,28 +112,28 @@ public enum OPArmorDefs implements IOPArmor {
         public IArmorMaterial getMaterial() {
             return new IArmorMaterial() {
                 @Override
-                public int getDurability(EquipmentSlotType slotIn) {
+                public int getDurabilityForSlot(EquipmentSlotType slotIn) {
                     return (int)(OPArmorDefs.DRAGON.getMaxDurability() * OPArmorDefs.DRAGON.getPercentOfMax()[slotIn.getIndex()]);
                 }
 
                 @Override
-                public int getDamageReductionAmount(EquipmentSlotType slotIn) {
+                public int getDefenseForSlot(EquipmentSlotType slotIn) {
                     return OPArmorDefs.DRAGON.getReductionAmounts()[slotIn.getIndex()];
                 }
 
                 @Override
-                public int getEnchantability() {
+                public int getEnchantmentValue() {
                     return 10;
                 }
 
                 @Override
-                public SoundEvent getSoundEvent() {
-                    return SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND;
+                public SoundEvent getEquipSound() {
+                    return SoundEvents.ARMOR_EQUIP_DIAMOND;
                 }
 
                 @Override
-                public Ingredient getRepairMaterial() {
-                    return Ingredient.fromTag(Objects.requireNonNull(ItemTags.getCollection().get(new ResourceLocation("assets/opitems", "material/dragon"))));
+                public Ingredient getRepairIngredient() {
+                    return Ingredient.of(Objects.requireNonNull(ItemTags.getAllTags().getTag(new ResourceLocation("assets/opitems", "material/dragon"))));
                 }
 
                 @Override
@@ -179,7 +179,7 @@ public enum OPArmorDefs implements IOPArmor {
         public Item.Properties getProperties() {
             return new Item.Properties(){
                 {
-                    this.group(OPItems.itemGroup);
+                    this.tab(OPItems.itemGroup);
                     this.rarity(Rarity.RARE);
                 }
             };
@@ -189,28 +189,28 @@ public enum OPArmorDefs implements IOPArmor {
         public IArmorMaterial getMaterial() {
             return new IArmorMaterial() {
                 @Override
-                public int getDurability(EquipmentSlotType slotIn) {
+                public int getDurabilityForSlot(EquipmentSlotType slotIn) {
                     return (int)(OPArmorDefs.GUARDIAN.getMaxDurability() * OPArmorDefs.GUARDIAN.getPercentOfMax()[slotIn.getIndex()]);
                 }
 
                 @Override
-                public int getDamageReductionAmount(EquipmentSlotType slotIn) {
+                public int getDefenseForSlot(EquipmentSlotType slotIn) {
                     return OPArmorDefs.GUARDIAN.getReductionAmounts()[slotIn.getIndex()];
                 }
 
                 @Override
-                public int getEnchantability() {
+                public int getEnchantmentValue() {
                     return 10;
                 }
 
                 @Override
-                public SoundEvent getSoundEvent() {
-                    return SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND;
+                public SoundEvent getEquipSound() {
+                    return SoundEvents.ARMOR_EQUIP_DIAMOND;
                 }
 
                 @Override
-                public Ingredient getRepairMaterial() {
-                    return Ingredient.fromTag(Objects.requireNonNull(ItemTags.getCollection().get(new ResourceLocation("assets/opitems", "material/guardian"))));
+                public Ingredient getRepairIngredient() {
+                    return Ingredient.of(Objects.requireNonNull(ItemTags.getAllTags().getTag(new ResourceLocation("assets/opitems", "material/guardian"))));
                 }
 
                 @Override

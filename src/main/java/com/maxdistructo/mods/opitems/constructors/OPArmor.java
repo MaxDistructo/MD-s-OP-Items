@@ -62,19 +62,19 @@ public class OPArmor {
             //OPItems.LOGGER.debug("Running Armor Tick");
             List<Item> armorSet = new java.util.ArrayList<>();
             String armorType = "wither_";
-            player.getArmorInventoryList().forEach(armor -> armorSet.add(armor.getItem()));
+            player.getArmorSlots().forEach(armor -> armorSet.add(armor.getItem()));
             AttributeModifier health_boost = new AttributeModifier(UUID.fromString("6d93ef5c-812f-4f24-b6e4-a62e2f88403e"),"opitems:wither_health_boost", 20.0, AttributeModifier.Operation.ADDITION);
             if(armorSet.containsAll(Arrays.asList(OPItems.registry.getValue(new ResourceLocation(OPItems.MOD_ID, armorType + "helmet")), OPItems.registry.getValue(new ResourceLocation(OPItems.MOD_ID, armorType + "chestplate")), OPItems.registry.getValue(new ResourceLocation(OPItems.MOD_ID, armorType + "leggings")), OPItems.registry.getValue(new ResourceLocation(OPItems.MOD_ID, armorType + "boots"))))){
-                player.addPotionEffect(new EffectInstance(Effects.STRENGTH,1,0,false,false));
-                player.addPotionEffect(new EffectInstance(Effects.RESISTANCE,1,0,false,false));
-                player.addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE,1,0,false,false));
-                player.addPotionEffect(new EffectInstance(Effects.SPEED, 10, 3,false, false));
-                player.abilities.allowFlying = true;
-                try{player.removeActivePotionEffect(Effects.WITHER);}catch(Exception ignored){}
+                player.addEffect(new EffectInstance(Effects.DAMAGE_BOOST,1,0,false,false));
+                player.addEffect(new EffectInstance(Effects.DAMAGE_RESISTANCE,1,0,false,false));
+                player.addEffect(new EffectInstance(Effects.FIRE_RESISTANCE,1,0,false,false));
+                player.addEffect(new EffectInstance(Effects.MOVEMENT_SPEED, 10, 3,false, false));
+                player.abilities.mayfly = true;
+                try{player.removeEffectNoUpdate(Effects.WITHER);}catch(Exception ignored){}
             }
             else{
                 if (!player.isCreative() && !player.isSpectator()){
-                    player.abilities.allowFlying = false;
+                    player.abilities.mayfly = false;
                 }
                 player.getAttribute(Attributes.MAX_HEALTH).removeModifier(health_boost);
 
@@ -144,15 +144,15 @@ public class OPArmor {
             //OPItems.LOGGER.debug("Running Armor Tick");
             List<Item> armorSet = new java.util.ArrayList<>();
             String armorType = "dragon_";
-            player.getArmorInventoryList().forEach(armor -> armorSet.add(armor.getItem()));
+            player.getArmorSlots().forEach(armor -> armorSet.add(armor.getItem()));
             if(armorSet.containsAll(Arrays.asList(OPItems.registry.getValue(new ResourceLocation(OPItems.MOD_ID, armorType + "helmet")), OPItems.registry.getValue(new ResourceLocation(OPItems.MOD_ID, armorType + "chestplate")), OPItems.registry.getValue(new ResourceLocation(OPItems.MOD_ID, armorType + "leggings")), OPItems.registry.getValue(new ResourceLocation(OPItems.MOD_ID, armorType + "boots"))))){
-                player.addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE,1,2,false,false));
-                player.abilities.allowFlying = true;
-                try{player.removeActivePotionEffect(Effects.WITHER);}catch(Exception ignored){}
+                player.addEffect(new EffectInstance(Effects.FIRE_RESISTANCE,1,2,false,false));
+                player.abilities.mayfly = true;
+                try{player.removeEffectNoUpdate(Effects.WITHER);}catch(Exception ignored){}
             }
             else{
                 if (!player.isCreative() && !player.isSpectator()){
-                    player.abilities.allowFlying = false;
+                    player.abilities.mayfly = false;
                 }
             }
         }
@@ -202,8 +202,8 @@ public class OPArmor {
         }
 
         @Override
-        public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType slot) {
-            Multimap<Attribute, AttributeModifier> map = super.getAttributeModifiers(slot);
+        public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlotType slot) {
+            Multimap<Attribute, AttributeModifier> map = super.getDefaultAttributeModifiers(slot);
             return map;
         }
 

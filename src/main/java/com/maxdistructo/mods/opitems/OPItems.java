@@ -40,13 +40,13 @@ public class OPItems {
     public static final ItemGroup itemGroup = new ItemGroup(10, "opitems") {
         @Override
         @OnlyIn(Dist.CLIENT)
-        public ItemStack createIcon() {
+        public ItemStack makeIcon() {
             return new ItemStack(OPItems.registry.getValue(new ResourceLocation(OPItems.MOD_ID,  "dragon_sword")));
         }
     };
     public static final Item.Properties defaultProperties = new Item.Properties() {
         {
-            this.group(itemGroup);
+            this.tab(itemGroup);
         }
     };
     public static final Logger LOGGER = LogManager.getLogger();
@@ -77,7 +77,7 @@ public class OPItems {
 
     private void doClientStuff(final FMLClientSetupEvent event) {
         // do something that can only be done on the client
-        LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
+        LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().options);
     }
 
     //Send IMC to other mod
@@ -154,7 +154,7 @@ public class OPItems {
                                 this.setRegistryName(OPItems.MOD_ID, tier.getName() + "shovel");
                             }
                         },
-                        new HoeItem(tier.getMcTier(), tier.getDamage(), tier.getSpeed(), tier.getProperties()) {
+                        new HoeItem(tier.getMcTier(), tier.getDamage() - 9, tier.getSpeed(), tier.getProperties()) {
                             {
                                 this.setRegistryName(OPItems.MOD_ID, tier.getName() + "hoe");
                             }

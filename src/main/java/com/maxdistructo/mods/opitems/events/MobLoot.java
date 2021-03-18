@@ -16,16 +16,16 @@ public class MobLoot {
 
     public static void onEntityDeath(LivingDropsEvent event) { //Wither does not have loot table so have to dirty add the drop.
         if (event.getEntity() instanceof WitherEntity) {
-            event.getEntity().entityDropItem(new ItemStack(OPItems.registry.getValue(new ResourceLocation(OPItems.MOD_ID, "wither_material")), 6));
+            event.getEntity().spawnAtLocation(new ItemStack(OPItems.registry.getValue(new ResourceLocation(OPItems.MOD_ID, "wither_material")), 6));
         }
         if (event.getEntity() instanceof ElderGuardianEntity){
-            event.getEntity().entityDropItem(new ItemStack(OPItems.registry.getValue(new ResourceLocation(OPItems.MOD_ID, "guardian_material")), 8));
+            event.getEntity().spawnAtLocation(new ItemStack(OPItems.registry.getValue(new ResourceLocation(OPItems.MOD_ID, "guardian_material")), 8));
         }
         if (event.getEntity() instanceof GuardianEntity){
-            event.getEntity().entityDropItem(new ItemStack(OPItems.registry.getValue(new ResourceLocation(OPItems.MOD_ID, "guardian_material")), 1));
+            event.getEntity().spawnAtLocation(new ItemStack(OPItems.registry.getValue(new ResourceLocation(OPItems.MOD_ID, "guardian_material")), 1));
         }
         if (event.getEntity() instanceof EnderDragonEntity){
-            event.getEntity().entityDropItem(new ItemStack(OPItems.registry.getValue(new ResourceLocation(OPItems.MOD_ID, "dragon_material")), 8));
+            event.getEntity().spawnAtLocation(new ItemStack(OPItems.registry.getValue(new ResourceLocation(OPItems.MOD_ID, "dragon_material")), 8));
         }
     }
 }
