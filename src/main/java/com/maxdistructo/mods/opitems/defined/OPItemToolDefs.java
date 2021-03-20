@@ -71,6 +71,8 @@ public class OPItemToolDefs {
                     this.durability(5000);
                     this.tab(OPItems.itemGroup);
                     this.rarity(Rarity.RARE);
+                    this.fireResistant();
+
                 }
             };
         }
@@ -134,6 +136,7 @@ public class OPItemToolDefs {
                     this.durability(10000);
                     this.tab(OPItems.itemGroup);
                     this.rarity(Rarity.EPIC);
+                    this.fireResistant();
                 }
             };
         }

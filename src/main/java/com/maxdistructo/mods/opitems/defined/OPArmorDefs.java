@@ -27,6 +27,7 @@ public enum OPArmorDefs implements IOPArmor {
                 {
                     this.tab(OPItems.itemGroup);
                     this.rarity(Rarity.RARE);
+                    this.fireResistant();
                 }
             };
         }
@@ -104,6 +105,7 @@ public enum OPArmorDefs implements IOPArmor {
                 {
                     this.tab(OPItems.itemGroup);
                     this.rarity(Rarity.EPIC);
+                    this.fireResistant();
                 }
             };
         }

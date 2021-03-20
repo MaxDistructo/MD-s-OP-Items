@@ -1,5 +1,6 @@
 package com.maxdistructo.mods.opitems.constructors;
 
+import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.maxdistructo.mods.opitems.OPItems;
 import com.maxdistructo.mods.opitems.defined.OPArmorDefs;
@@ -68,7 +69,7 @@ public class OPArmor {
                 player.addEffect(new EffectInstance(Effects.DAMAGE_BOOST,1,0,false,false));
                 player.addEffect(new EffectInstance(Effects.DAMAGE_RESISTANCE,1,0,false,false));
                 player.addEffect(new EffectInstance(Effects.FIRE_RESISTANCE,1,0,false,false));
-                player.addEffect(new EffectInstance(Effects.MOVEMENT_SPEED, 10, 3,false, false));
+                //player.addEffect(new EffectInstance(Effects.MOVEMENT_SPEED, 10, 3,false, false));
                 player.abilities.mayfly = true;
                 try{player.removeEffectNoUpdate(Effects.WITHER);}catch(Exception ignored){}
             }
@@ -81,17 +82,20 @@ public class OPArmor {
             }
         }
 
-        /*
+
         @Override
-        public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType slot) {
-            Multimap<Attribute, AttributeModifier> map = super.getAttributeModifiers(slot);
+        public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType slot, ItemStack stack) {
+            Multimap<Attribute, AttributeModifier> map = super.getAttributeModifiers(slot, stack);
+            ImmutableMultimap.Builder<Attribute,AttributeModifier> new_map = new ImmutableMultimap.Builder<>();
             if (this.slot == slot) {
-                map.put(Attributes.ATTACK_DAMAGE, getOrCreateModifier(Attributes.ATTACK_DAMAGE, () -> new AttributeModifier(damage_uuids.get(slot.getIndex()), "opitems:" + slot.getName() + "_attackdamage", 1.25f, AttributeModifier.Operation.ADDITION)));
-                map.put(Attributes.MAX_HEALTH, getOrCreateModifier(Attributes.MAX_HEALTH, () -> new AttributeModifier(health_uuids.get(slot.getIndex()), "opitems:" + slot.getName() + "_hp", 2.5f, AttributeModifier.Operation.ADDITION)));
+                new_map.putAll(map);
+                new_map.put(Attributes.ATTACK_DAMAGE, getOrCreateModifier(Attributes.ATTACK_DAMAGE, () -> new AttributeModifier(damage_uuids.get(slot.getIndex()), "opitems:" + slot.getName() + "_attackdamage", 1.25f, AttributeModifier.Operation.ADDITION)));
+                new_map.put(Attributes.MAX_HEALTH, getOrCreateModifier(Attributes.MAX_HEALTH, () -> new AttributeModifier(health_uuids.get(slot.getIndex()), "opitems:" + slot.getName() + "_hp", 2.5f, AttributeModifier.Operation.ADDITION)));
             }
-            return map;
+            return new_map.build();
         }
-        */
+
+
         @Override
         public String getRegName() {
             return "wither_";
@@ -101,6 +105,7 @@ public class OPArmor {
         public Map<Attribute, AttributeModifier> getModifiers() {
             return modifiers;
         }
+
     }
     public static class OPDragonArmor extends ArmorItem implements IArmorItemExtension {
         final static OPArmorDefs def = OPArmorDefs.DRAGON;
@@ -162,19 +167,21 @@ public class OPArmor {
             return modifiers;
         }
 
-        /*
+
         @Override
-        public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType slot) {
-            Multimap<Attribute, AttributeModifier> map = super.getAttributeModifiers(slot);
+        public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType slot, ItemStack stack) {
+            Multimap<Attribute, AttributeModifier> og_map = super.getAttributeModifiers(slot, stack);
+            ImmutableMultimap.Builder<Attribute, AttributeModifier> new_map = new ImmutableMultimap.Builder<>();
             if (this.slot == slot) {
-                map.put(Attributes.ATTACK_DAMAGE, getOrCreateModifier(Attributes.ATTACK_DAMAGE, () -> new AttributeModifier(damage_uuids.get(slot.getIndex()), "opitems:" + slot.getName() + "_attackdamage", 2.5f, AttributeModifier.Operation.ADDITION)));
-                map.put(Attributes.MOVEMENT_SPEED, getOrCreateModifier(Attributes.MOVEMENT_SPEED, () -> new AttributeModifier(speed_uuids.get(slot.getIndex()), "opitems:" + slot.getName() + "_movementspeed", 0.175f, AttributeModifier.Operation.ADDITION)));
-                map.put(Attributes.FLYING_SPEED, getOrCreateModifier(Attributes.FLYING_SPEED, () -> new AttributeModifier(fly_uuids.get(slot.getIndex()), "opitems:" + slot.getName() + "_flyspeed", 0.175f, AttributeModifier.Operation.ADDITION)));
-                map.put(Attributes.MAX_HEALTH, getOrCreateModifier(Attributes.MAX_HEALTH, () -> new AttributeModifier(health_uuids.get(slot.getIndex()), "opitems:" + slot.getName() + "_hp", 5f, AttributeModifier.Operation.ADDITION)));
+                new_map.putAll(og_map);
+                new_map.put(Attributes.ATTACK_DAMAGE, getOrCreateModifier(Attributes.ATTACK_DAMAGE, () -> new AttributeModifier(damage_uuids.get(slot.getIndex()), "opitems:" + slot.getName() + "_attackdamage", 2.5f, AttributeModifier.Operation.ADDITION)));
+                //new_map.put(Attributes.MOVEMENT_SPEED, getOrCreateModifier(Attributes.MOVEMENT_SPEED, () -> new AttributeModifier(speed_uuids.get(slot.getIndex()), "opitems:" + slot.getName() + "_movementspeed", 0.175f, AttributeModifier.Operation.ADDITION)));
+                new_map.put(Attributes.FLYING_SPEED, getOrCreateModifier(Attributes.FLYING_SPEED, () -> new AttributeModifier(fly_uuids.get(slot.getIndex()), "opitems:" + slot.getName() + "_flyspeed", 0.175f, AttributeModifier.Operation.ADDITION)));
+                new_map.put(Attributes.MAX_HEALTH, getOrCreateModifier(Attributes.MAX_HEALTH, () -> new AttributeModifier(health_uuids.get(slot.getIndex()), "opitems:" + slot.getName() + "_hp", 5f, AttributeModifier.Operation.ADDITION)));
             }
-            return map;
+            return new_map.build();
         }
-        */
+
         @Override
         public String getRegName() {
             return "dragon_";
@@ -199,12 +206,6 @@ public class OPArmor {
         @Override
         public Map<Attribute, AttributeModifier> getModifiers() {
             return modifiers;
-        }
-
-        @Override
-        public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlotType slot) {
-            Multimap<Attribute, AttributeModifier> map = super.getDefaultAttributeModifiers(slot);
-            return map;
         }
 
         @Override
