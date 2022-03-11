@@ -37,6 +37,6 @@ probe required if you so desire.
 [[dependencies.opitems]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16,1.17)"
+    versionRange="[1.18,)"
     ordering="NONE"
     side="BOTH"

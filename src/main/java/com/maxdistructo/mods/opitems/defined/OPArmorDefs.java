@@ -2,15 +2,15 @@ package com.maxdistructo.mods.opitems.defined;
 
 import com.maxdistructo.mods.opitems.OPItems;
 import com.maxdistructo.mods.opitems.interfaces.IOPArmor;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.IArmorMaterial;
-import net.minecraft.item.Item;
-import net.minecraft.item.Rarity;
-import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.Objects;
 
@@ -33,15 +33,15 @@ public enum OPArmorDefs implements IOPArmor {
         }
 
         @Override
-        public IArmorMaterial getMaterial() {
-            return new IArmorMaterial() {
+        public ArmorMaterial getMaterial() {
+            return new ArmorMaterial() {
                 @Override
-                public int getDurabilityForSlot(EquipmentSlotType slotIn) {
+                public int getDurabilityForSlot(EquipmentSlot slotIn) {
                     return (int)(OPArmorDefs.WITHER.getMaxDurability() * OPArmorDefs.WITHER.getPercentOfMax()[slotIn.getIndex()]);
                 }
 
                 @Override
-                public int getDefenseForSlot(EquipmentSlotType slotIn) {
+                public int getDefenseForSlot(EquipmentSlot slotIn) {
                     return OPArmorDefs.WITHER.getReductionAmounts()[slotIn.getIndex()];
                 }
 
@@ -57,7 +57,7 @@ public enum OPArmorDefs implements IOPArmor {
 
                 @Override
                 public Ingredient getRepairIngredient() {
-                    return Ingredient.of(Objects.requireNonNull(ItemTags.getAllTags().getTag(new ResourceLocation("assets/opitems", "material/wither"))));
+                    return Ingredient.of(Objects.requireNonNull(ItemTags.create(new ResourceLocation("assets/opitems", "material/wither"))));
                 }
 
                 @Override
@@ -111,15 +111,15 @@ public enum OPArmorDefs implements IOPArmor {
         }
 
         @Override
-        public IArmorMaterial getMaterial() {
-            return new IArmorMaterial() {
+        public ArmorMaterial getMaterial() {
+            return new ArmorMaterial() {
                 @Override
-                public int getDurabilityForSlot(EquipmentSlotType slotIn) {
+                public int getDurabilityForSlot(EquipmentSlot slotIn) {
                     return (int)(OPArmorDefs.DRAGON.getMaxDurability() * OPArmorDefs.DRAGON.getPercentOfMax()[slotIn.getIndex()]);
                 }
 
                 @Override
-                public int getDefenseForSlot(EquipmentSlotType slotIn) {
+                public int getDefenseForSlot(EquipmentSlot slotIn) {
                     return OPArmorDefs.DRAGON.getReductionAmounts()[slotIn.getIndex()];
                 }
 
@@ -135,7 +135,7 @@ public enum OPArmorDefs implements IOPArmor {
 
                 @Override
                 public Ingredient getRepairIngredient() {
-                    return Ingredient.of(Objects.requireNonNull(ItemTags.getAllTags().getTag(new ResourceLocation("assets/opitems", "material/dragon"))));
+                    return Ingredient.of(Objects.requireNonNull(ItemTags.create(new ResourceLocation("assets/opitems", "material/dragon"))));
                 }
 
                 @Override
@@ -188,15 +188,15 @@ public enum OPArmorDefs implements IOPArmor {
         }
 
         @Override
-        public IArmorMaterial getMaterial() {
-            return new IArmorMaterial() {
+        public ArmorMaterial getMaterial() {
+            return new ArmorMaterial() {
                 @Override
-                public int getDurabilityForSlot(EquipmentSlotType slotIn) {
+                public int getDurabilityForSlot(EquipmentSlot slotIn) {
                     return (int)(OPArmorDefs.GUARDIAN.getMaxDurability() * OPArmorDefs.GUARDIAN.getPercentOfMax()[slotIn.getIndex()]);
                 }
 
                 @Override
-                public int getDefenseForSlot(EquipmentSlotType slotIn) {
+                public int getDefenseForSlot(EquipmentSlot slotIn) {
                     return OPArmorDefs.GUARDIAN.getReductionAmounts()[slotIn.getIndex()];
                 }
 
@@ -212,7 +212,7 @@ public enum OPArmorDefs implements IOPArmor {
 
                 @Override
                 public Ingredient getRepairIngredient() {
-                    return Ingredient.of(Objects.requireNonNull(ItemTags.getAllTags().getTag(new ResourceLocation("assets/opitems", "material/guardian"))));
+                    return Ingredient.of(Objects.requireNonNull(ItemTags.create(new ResourceLocation("assets/opitems", "material/guardian"))));
                 }
 
                 @Override

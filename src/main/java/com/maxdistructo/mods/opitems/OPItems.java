@@ -9,22 +9,17 @@ import com.maxdistructo.mods.opitems.defined.OPItemToolDefs;
 import com.maxdistructo.mods.opitems.events.MobLoot;
 import com.maxdistructo.mods.opitems.interfaces.IOPItem;
 import com.maxdistructo.mods.opitems.interfaces.IOPItemTool;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.*;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.*;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
+import net.minecraftforge.fml.event.lifecycle.*;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.logging.log4j.LogManager;
@@ -37,7 +32,7 @@ import java.util.stream.Collectors;
 public class OPItems {
     public static final String MOD_ID = "opitems";
     //Define static values used for item and block creation
-    public static final ItemGroup itemGroup = new ItemGroup(10, "opitems") {
+    public static final CreativeModeTab itemGroup = new CreativeModeTab(10, "opitems") {
         @Override
         @OnlyIn(Dist.CLIENT)
         public ItemStack makeIcon() {
@@ -72,7 +67,7 @@ public class OPItems {
 
     private void doClientStuff(final FMLClientSetupEvent event) {
         // do something that can only be done on the client
-        LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().options);
+        //LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().options);
     }
 
     //Send IMC to other mod
@@ -88,7 +83,7 @@ public class OPItems {
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
-    public void onServerStarting(FMLServerStartingEvent event) {
+    public void onServerStarting(FMLDedicatedServerSetupEvent event) {
         // do something when the server starts
         LOGGER.info("HELLO from server starting");
     }
@@ -110,18 +105,18 @@ public class OPItems {
             });
             OPItems.LOGGER.info("Registering Armors");
             registry.registerAll(
-                    new OPArmor.OPDragonArmor(EquipmentSlotType.HEAD),
-                    new OPArmor.OPDragonArmor(EquipmentSlotType.CHEST),
-                    new OPArmor.OPDragonArmor(EquipmentSlotType.LEGS),
-                    new OPArmor.OPDragonArmor(EquipmentSlotType.FEET),
-                    new OPArmor.OPGuardianArmor(EquipmentSlotType.HEAD),
-                    new OPArmor.OPGuardianArmor(EquipmentSlotType.CHEST),
-                    new OPArmor.OPGuardianArmor(EquipmentSlotType.LEGS),
-                    new OPArmor.OPGuardianArmor(EquipmentSlotType.FEET),
-                    new OPArmor.OPWitherArmor(EquipmentSlotType.HEAD),
-                    new OPArmor.OPWitherArmor(EquipmentSlotType.CHEST),
-                    new OPArmor.OPWitherArmor(EquipmentSlotType.LEGS),
-                    new OPArmor.OPWitherArmor(EquipmentSlotType.FEET)
+                    new OPArmor.OPDragonArmor(EquipmentSlot.HEAD),
+                    new OPArmor.OPDragonArmor(EquipmentSlot.CHEST),
+                    new OPArmor.OPDragonArmor(EquipmentSlot.LEGS),
+                    new OPArmor.OPDragonArmor(EquipmentSlot.FEET),
+                    new OPArmor.OPGuardianArmor(EquipmentSlot.HEAD),
+                    new OPArmor.OPGuardianArmor(EquipmentSlot.CHEST),
+                    new OPArmor.OPGuardianArmor(EquipmentSlot.LEGS),
+                    new OPArmor.OPGuardianArmor(EquipmentSlot.FEET),
+                    new OPArmor.OPWitherArmor(EquipmentSlot.HEAD),
+                    new OPArmor.OPWitherArmor(EquipmentSlot.CHEST),
+                    new OPArmor.OPWitherArmor(EquipmentSlot.LEGS),
+                    new OPArmor.OPWitherArmor(EquipmentSlot.FEET)
             );
             //Tool Registry Loop. Allows for 1 OP Item Tier to be used on each of the 5 different tools.
             OPItems.LOGGER.info("Registering Tools");

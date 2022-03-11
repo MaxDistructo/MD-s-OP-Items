@@ -1,9 +1,9 @@
 package com.maxdistructo.mods.opitems.interfaces;
 
-import net.minecraft.item.IArmorMaterial;
+import net.minecraft.world.item.ArmorMaterial;
 
 public interface IOPArmor extends IOPItem {
-    IArmorMaterial getMaterial();
+    ArmorMaterial getMaterial();
     double[] getPercentOfMax();
     int getMaxDurability();
     int[] getReductionAmounts();

@@ -1,9 +1,9 @@
 package com.maxdistructo.mods.opitems.interfaces;
 
-import net.minecraft.item.IItemTier;
+import net.minecraft.world.item.Tier;
 
 public interface IOPItemTool extends IOPItem{
-    IItemTier getMcTier();
+    Tier getMcTier();
     int getDamage();
     float getSpeed();
 }

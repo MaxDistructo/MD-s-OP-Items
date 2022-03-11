@@ -2,7 +2,7 @@ package com.maxdistructo.mods.opitems.defined;
 
 import com.maxdistructo.mods.opitems.OPItems;
 import com.maxdistructo.mods.opitems.interfaces.IOPItem;
-import net.minecraft.item.Item;
+import net.minecraft.world.item.Item;
 
 public class OPItemMaterial implements IOPItem {
 

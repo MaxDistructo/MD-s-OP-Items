@@ -2,12 +2,12 @@ package com.maxdistructo.mods.opitems.defined;
 
 import com.maxdistructo.mods.opitems.OPItems;
 import com.maxdistructo.mods.opitems.interfaces.IOPItemTool;
-import net.minecraft.item.IItemTier;
-import net.minecraft.item.Item;
-import net.minecraft.item.Rarity;
-import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.Objects;
 
@@ -15,8 +15,8 @@ public class OPItemToolDefs {
     public static class netherItemTier implements IOPItemTool {
 
         @Override
-        public IItemTier getMcTier() {
-            return new IItemTier(){
+        public Tier getMcTier() {
+            return new Tier(){
                 @Override
                 public int getUses() {
                     return 5000;
@@ -44,7 +44,7 @@ public class OPItemToolDefs {
 
                 @Override
                 public Ingredient getRepairIngredient() {
-                    return Ingredient.of(Objects.requireNonNull(ItemTags.getAllTags().getTag(new ResourceLocation("assets/opitems", "material/wither"))));
+                    return Ingredient.of(Objects.requireNonNull(ItemTags.create((new ResourceLocation("assets/opitems", "material/wither")))));
                 }
             };
         }
@@ -80,8 +80,8 @@ public class OPItemToolDefs {
     public static class dragonItemTier implements IOPItemTool {
 
         @Override
-        public IItemTier getMcTier() {
-            return new IItemTier(){
+        public Tier getMcTier() {
+            return new Tier(){
                 @Override
                 public int getUses() {
                     return 10000;
@@ -109,7 +109,7 @@ public class OPItemToolDefs {
 
                 @Override
                 public Ingredient getRepairIngredient() {
-                    return Ingredient.of(Objects.requireNonNull(ItemTags.getAllTags().getTag(new ResourceLocation("assets/opitems", "material/dragon"))));
+                    return Ingredient.of(Objects.requireNonNull(ItemTags.create(new ResourceLocation("assets/opitems", "material/dragon"))));
                 }
             };
         }
@@ -145,8 +145,8 @@ public class OPItemToolDefs {
     public static class guardianItemTier implements IOPItemTool {
 
         @Override
-        public IItemTier getMcTier() {
-            return new IItemTier(){
+        public Tier getMcTier() {
+            return new Tier(){
                 @Override
                 public int getUses() {
                     return 3000;
@@ -174,7 +174,7 @@ public class OPItemToolDefs {
 
                 @Override
                 public Ingredient getRepairIngredient() {
-                    return Ingredient.of(Objects.requireNonNull(ItemTags.getAllTags().getTag(new ResourceLocation("assets/opitems", "material/guardian"))));
+                    return Ingredient.of(Objects.requireNonNull(ItemTags.create(new ResourceLocation("assets/opitems", "material/guardian"))));
                 }
             };
         }

@@ -5,19 +5,20 @@ import com.google.common.collect.Multimap;
 import com.maxdistructo.mods.opitems.OPItems;
 import com.maxdistructo.mods.opitems.defined.OPArmorDefs;
 import com.maxdistructo.mods.opitems.interfaces.IArmorItemExtension;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.attributes.Attribute;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
+import net.minecraft.client.renderer.EffectInstance;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 import java.util.*;
 
@@ -32,7 +33,7 @@ public class OPArmor {
         List<UUID> speed_uuids = new ArrayList<>();
         List<UUID> fly_uuids = new ArrayList<>();
         List<UUID> damage_uuids = new ArrayList<>();
-        public OPWitherArmor(EquipmentSlotType type){
+        public OPWitherArmor(EquipmentSlot type){
             super(def.getMaterial(), type, def.getProperties());
             setRegistryName(OPItems.MOD_ID, def.getName() + armorName[type.getIndex()]);
             health_uuids.addAll(Arrays.asList(
@@ -59,23 +60,23 @@ public class OPArmor {
             ));
         }
         @Override
-        public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
+        public void onArmorTick(ItemStack stack, Level world, Player player) {
             //OPItems.LOGGER.debug("Running Armor Tick");
             List<Item> armorSet = new java.util.ArrayList<>();
             String armorType = "wither_";
             player.getArmorSlots().forEach(armor -> armorSet.add(armor.getItem()));
             AttributeModifier health_boost = new AttributeModifier(UUID.fromString("6d93ef5c-812f-4f24-b6e4-a62e2f88403e"),"opitems:wither_health_boost", 20.0, AttributeModifier.Operation.ADDITION);
             if(armorSet.containsAll(Arrays.asList(OPItems.registry.getValue(new ResourceLocation(OPItems.MOD_ID, armorType + "helmet")), OPItems.registry.getValue(new ResourceLocation(OPItems.MOD_ID, armorType + "chestplate")), OPItems.registry.getValue(new ResourceLocation(OPItems.MOD_ID, armorType + "leggings")), OPItems.registry.getValue(new ResourceLocation(OPItems.MOD_ID, armorType + "boots"))))){
-                player.addEffect(new EffectInstance(Effects.DAMAGE_BOOST,1,0,false,false));
-                player.addEffect(new EffectInstance(Effects.DAMAGE_RESISTANCE,1,0,false,false));
-                player.addEffect(new EffectInstance(Effects.FIRE_RESISTANCE,1,0,false,false));
+                player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST,1,0,false,false));
+                player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE,1,0,false,false));
+                player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE,1,0,false,false));
                 //player.addEffect(new EffectInstance(Effects.MOVEMENT_SPEED, 10, 3,false, false));
-                player.abilities.mayfly = true;
-                try{player.removeEffectNoUpdate(Effects.WITHER);}catch(Exception ignored){}
+                //player.abilities.mayfly = true;
+                try{player.removeEffectNoUpdate(MobEffects.WITHER);}catch(Exception ignored){}
             }
             else{
                 if (!player.isCreative() && !player.isSpectator()){
-                    player.abilities.mayfly = false;
+                    //player.abilities.mayfly = false;
                 }
                 player.getAttribute(Attributes.MAX_HEALTH).removeModifier(health_boost);
 
@@ -84,7 +85,7 @@ public class OPArmor {
 
 
         @Override
-        public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType slot, ItemStack stack) {
+        public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
             Multimap<Attribute, AttributeModifier> map = super.getAttributeModifiers(slot, stack);
             ImmutableMultimap.Builder<Attribute,AttributeModifier> new_map = new ImmutableMultimap.Builder<>();
             if (this.slot == slot) {
@@ -117,7 +118,7 @@ public class OPArmor {
         List<UUID> speed_uuids = new ArrayList<>();
         List<UUID> fly_uuids = new ArrayList<>();
         List<UUID> damage_uuids = new ArrayList<>();
-        public OPDragonArmor(EquipmentSlotType type){
+        public OPDragonArmor(EquipmentSlot type){
             super(def.getMaterial(), type, def.getProperties());
             setRegistryName(OPItems.MOD_ID, def.getName() + armorName[type.getIndex()]);
             health_uuids.addAll(Arrays.asList(
@@ -145,19 +146,19 @@ public class OPArmor {
         }
 
         @Override
-        public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
+        public void onArmorTick(ItemStack stack, Level world, Player player) {
             //OPItems.LOGGER.debug("Running Armor Tick");
             List<Item> armorSet = new java.util.ArrayList<>();
             String armorType = "dragon_";
             player.getArmorSlots().forEach(armor -> armorSet.add(armor.getItem()));
             if(armorSet.containsAll(Arrays.asList(OPItems.registry.getValue(new ResourceLocation(OPItems.MOD_ID, armorType + "helmet")), OPItems.registry.getValue(new ResourceLocation(OPItems.MOD_ID, armorType + "chestplate")), OPItems.registry.getValue(new ResourceLocation(OPItems.MOD_ID, armorType + "leggings")), OPItems.registry.getValue(new ResourceLocation(OPItems.MOD_ID, armorType + "boots"))))){
-                player.addEffect(new EffectInstance(Effects.FIRE_RESISTANCE,1,2,false,false));
-                player.abilities.mayfly = true;
-                try{player.removeEffectNoUpdate(Effects.WITHER);}catch(Exception ignored){}
+                player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE,1,2,false,false));
+                //player.abilities.mayfly = true;
+                try{player.removeEffectNoUpdate(MobEffects.WITHER);}catch(Exception ignored){}
             }
             else{
                 if (!player.isCreative() && !player.isSpectator()){
-                    player.abilities.mayfly = false;
+                    ///player.abilities.mayfly = false;
                 }
             }
         }
@@ -169,7 +170,7 @@ public class OPArmor {
 
 
         @Override
-        public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType slot, ItemStack stack) {
+        public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
             Multimap<Attribute, AttributeModifier> og_map = super.getAttributeModifiers(slot, stack);
             ImmutableMultimap.Builder<Attribute, AttributeModifier> new_map = new ImmutableMultimap.Builder<>();
             if (this.slot == slot) {
@@ -191,12 +192,12 @@ public class OPArmor {
         final static OPArmorDefs def = OPArmorDefs.GUARDIAN;
         public static OPArmorDefs getDef() {return def;}
         Map<Attribute, AttributeModifier> modifiers = new HashMap<>();
-        public OPGuardianArmor (EquipmentSlotType type){
+        public OPGuardianArmor (EquipmentSlot type){
             super(def.getMaterial(), type, def.getProperties());
             setRegistryName(OPItems.MOD_ID, def.getName() + armorName[type.getIndex()]);
         }
         @Override
-        public void onArmorTick(ItemStack stack, World world, PlayerEntity player){
+        public void onArmorTick(ItemStack stack, Level world, Player player){
             if(player.getLastDamageSource() == DamageSource.DROWN){
                 //When drowning, the player loses health by half heart. Restore it if they are drowning.
                 player.heal(.5f);
