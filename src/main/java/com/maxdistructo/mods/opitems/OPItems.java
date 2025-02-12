@@ -9,19 +9,18 @@ import com.maxdistructo.mods.opitems.defined.OPItemToolDefs;
 import com.maxdistructo.mods.opitems.events.MobLoot;
 import com.maxdistructo.mods.opitems.interfaces.IOPItem;
 import com.maxdistructo.mods.opitems.interfaces.IOPItemTool;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.*;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.IForgeRegistry;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.*;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.RegisterEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -86,6 +85,27 @@ public class OPItems {
     public void onServerStarting(FMLDedicatedServerSetupEvent event) {
         // do something when the server starts
         LOGGER.info("HELLO from server starting");
+    }
+
+    public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(OPItems.MOD_ID);
+
+    @SubscribeEvent
+    public void register(RegisterEvent event){
+        event.register(
+                BuiltInRegistries.ITEM,
+                registry -> {
+                    IOPItem[] items = {OPItemDefs.OBSIDIAN_STICK, new OPItemMaterial("dragon"), new OPItemMaterial("wither"), new OPItemMaterial("guardian")};
+                    Arrays.stream(items).forEach(item -> {
+                        registry.register(
+                                ResourceLocation.fromNamespaceAndPath(MOD_ID, item.getName()), new OPItem(item)
+                        );
+                    });
+                    registry.register(
+                            ResourceLocation.fromNamespaceAndPath(MOD_ID, "dragon_helmet"), new OPArmor.OPDragonArmor(EquipmentSlot.HEAD)
+
+                    )
+                }
+        );
     }
 
     // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
@@ -155,12 +175,6 @@ public class OPItems {
             IOPItemTool guardian_tier = new OPItemToolDefs.guardianItemTier();
             Item[] itemsRegistry = {new OPGuardianToolDef.axe(guardian_tier), new OPGuardianToolDef.shovel(guardian_tier), new OPGuardianToolDef.hoe(guardian_tier), new OPGuardianToolDef.pick(guardian_tier), new OPGuardianToolDef.sword(guardian_tier)};
             Arrays.stream(itemsRegistry).forEach(registry::register);
-        }
-
-        @SubscribeEvent
-        public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
-            // register a new block here
-            LOGGER.info("HELLO from Register Block");
         }
     }
 }

@@ -120,7 +120,6 @@ public class OPArmor {
         List<UUID> damage_uuids = new ArrayList<>();
         public OPDragonArmor(EquipmentSlot type){
             super(def.getMaterial(), type, def.getProperties());
-            setRegistryName(OPItems.MOD_ID, def.getName() + armorName[type.getIndex()]);
             health_uuids.addAll(Arrays.asList(
                     UUID.fromString("3d31693d-e0a3-4d1c-97c9-23f8a118c74c"),
                     UUID.fromString("3f195c8f-7ae2-4f1d-9240-a0efb5e2872b"),
